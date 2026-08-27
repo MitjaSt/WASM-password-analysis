@@ -1,0 +1,278 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f0f2f5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.container {
+  width: 100%;
+  max-width: 520px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 36px 32px;
+  box-shadow: 0 4px 24px rgba(0,0,0,.08);
+}
+
+h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+/* ── Input ────────────────────────────────── */
+.password-field label {
+  display: block;
+  color: #222;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.field-hint {
+  color: #666;
+  font-size: 12px;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.password-input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 17px;
+  font-family: "SF Mono", "Fira Code", monospace;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  transition: border-color .15s;
+  color: #111;
+}
+
+.password-input:focus {
+  border-color: #4a90e2;
+}
+
+.password-input:focus-visible {
+  outline: 3px solid rgba(74, 144, 226, .35);
+  outline-offset: 2px;
+}
+
+.password-input:disabled {
+  background: #fafafa;
+  color: #aaa;
+}
+
+/* ── Loading ──────────────────────────────── */
+.loading {
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* ── Results ──────────────────────────────── */
+.results {
+  margin-top: 24px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ── Strength bar ─────────────────────────── */
+.strength-row {
+  margin-bottom: 20px;
+}
+
+.strength-summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.strength-title {
+  color: #555;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.strength-bar-track {
+  width: 100%;
+  height: 8px;
+  background: #ececec;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.strength-bar {
+  height: 100%;
+  border-radius: 99px;
+  width: 0%;
+  transition: width .25s ease, background-color .25s ease;
+}
+
+.strength-bar.weak        { background: #e74c3c; }
+.strength-bar.fair        { background: #f39c12; }
+.strength-bar.strong      { background: #2ecc71; }
+.strength-bar.very-strong { background: #27ae60; }
+
+.strength-label {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.strength-label.weak        { color: #e74c3c; }
+.strength-label.fair        { color: #f39c12; }
+.strength-label.strong      { color: #2ecc71; }
+.strength-label.very-strong { color: #27ae60; }
+
+/* ── Metrics ──────────────────────────────── */
+.metrics {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.metric {
+  flex: 1;
+  background: #f7f8fa;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.metric-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+
+.metric-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+}
+
+/* ── Pattern chips ────────────────────────── */
+.patterns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pattern-chip {
+  display: inline-block;
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffc107;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ── Breach check ─────────────────────────── */
+.breach-status {
+  border: 1px solid #d9dee7;
+  border-inline-start: 4px solid #7b8794;
+  border-radius: 10px;
+  margin-top: 18px;
+  padding: 12px 14px;
+}
+
+.breach-status h2 {
+  color: #333;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .4px;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+#breach-message {
+  color: #444;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.breach-status[data-state="checking"] {
+  border-inline-start-color: #4a90e2;
+}
+
+.breach-status[data-state="pwned"] {
+  background: #fff2f1;
+  border-inline-start-color: #c0392b;
+}
+
+.breach-status[data-state="not-pwned"] {
+  background: #effaf3;
+  border-inline-start-color: #218c4f;
+}
+
+.breach-status[data-state="unavailable"] {
+  background: #fff8e6;
+  border-inline-start-color: #a86f00;
+}
+
+.breach-privacy {
+  color: #707780;
+  font-size: 11px;
+  line-height: 1.45;
+  margin-top: 7px;
+}
+
+.breach-privacy a {
+  color: #356fae;
+}
+
+.breach-privacy a:focus-visible {
+  outline: 3px solid rgba(74, 144, 226, .35);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Footer ───────────────────────────────── */
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: #bbb;
+  margin-top: 16px;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Analyzer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>Password Analyzer</h1>
+      <p class="subtitle">Local analysis runs in WebAssembly. An optional privacy-preserving breach check sends only five characters of a local hash.</p>
+
+      <div class="password-field">
+        <label for="password">Password to analyze</label>
+        <p id="password-hint" class="field-hint">The breach check runs after you leave this field.</p>
+        <input
+          class="password-input"
+          type="password"
+          id="password"
+          placeholder="Type a password…"
+          autocomplete="new-password"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          aria-describedby="password-hint"
+          disabled
+        >
+      </div>
+
+      <p id="loading" class="loading">Loading WebAssembly…</p>
+
+      <div id="results" class="results hidden">
+        <div class="strength-row">
+          <div class="strength-summary">
+            <span class="strength-title">Password strength</span>
+            <span id="strength-label" class="strength-label"></span>
+          </div>
+          <div
+            id="strength-meter"
+            class="strength-bar-track"
+            role="meter"
+            aria-label="Password strength"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+          >
+            <div id="strength-bar" class="strength-bar"></div>
+          </div>
+        </div>
+
+        <div class="metrics">
+          <div class="metric">
+            <span class="metric-label">Entropy</span>
+            <span id="entropy" class="metric-value">—</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Charset</span>
+            <span id="charset" class="metric-value">—</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Crack time</span>
+            <span id="crack-time" class="metric-value">—</span>
+          </div>
+        </div>
+
+        <div id="patterns" class="patterns"></div>
+
+        <section id="breach-status" class="breach-status" data-state="idle" aria-labelledby="breach-heading">
+          <h2 id="breach-heading">Known breach check</h2>
+          <p id="breach-message">Checked after you leave the password field.</p>
+          <p class="breach-privacy">
+            Uses the five-character k-anonymity API from
+            <a href="https://haveibeenpwned.com/Passwords" rel="noreferrer">Have I Been Pwned</a>.
+          </p>
+        </section>
+      </div>
+
+      <p id="status-announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p class="footer">Built with Go + WebAssembly</p>
+  </footer>
+
+  <script src="wasm_exec.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
